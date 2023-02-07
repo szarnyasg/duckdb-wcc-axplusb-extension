@@ -4,7 +4,7 @@
 
 namespace duckdb {
 
-class BoilerplateExtension : public Extension {
+class AxplusbExtension : public Extension {
 public:
 	void Load(DuckDB &db) override;
 	std::string Name() override;

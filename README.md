@@ -1,40 +1,52 @@
 # WIP Disclaimer
 This template is currently work-in-progress. Feel free to play around with it and give us feedback. Note also that this template depends on a development version of DuckDB. Follow https://duckdb.org/news for more information on official launch.
 
+## Overview
+
+DuckDB extension implementing the `axplusb` scalar UDF for the paper [In-database connected component analysis](https://arxiv.org/pdf/1802.09478.pdf).
+
+To clone, run:
+
+```bash
+git clone --recurse-submodules git@github.com:szarnyasg/duckdb-wcc-axplusb-extension.git
+```
+
 # DuckDB Extension Template
 The main goal of this template is to allow users to easily develop, test and distribute their own DuckDB extension.
 
 ## Build
 To build the extension:
+
 ```sh
 make
 ```
+
 The main binaries that will be built are:
+
 ```sh
-./build/release/duckdb/duckdb
-./build/release/duckdb/test/unittest
-./build/release/duckdb/extension/<extension_name>/<extension_name>.duckdb_extension
+./build/release/duckdb
+./build/release/test/unittest
+./build/release/extension/<extension_name>/<extension_name>.duckdb_extension
 ```
+
 - `duckdb` is the binary for the duckdb shell with the extension code automatically loaded. 
 - `unittest` is the test runner of duckdb. Again, the extension is already linked into the binary.
 - `<extension_name>.duckdb_extension` is the loadable binary as it would be distributed.
 
 ## Running the extension
+
 To run the extension code, simply start the shell with `./build/release/duckdb`.
 
-Now we can use the features from the extension directly in DuckDB. The template contains a single scalar function `do_a_boilerplate` that takes no arguments and returns a string:
+Now we can use the features from the extension directly in DuckDB:
+
 ```
-D select do_a_boilerplate() as result;
-┌────────────────────┐
-│       result       │
-│      varchar       │
-├────────────────────┤
-│ I'm a boilerplate! │
-└────────────────────┘
+D select axplusb(1, 2, 3) as result;
 ```
 
 ## Running the tests
+
 Different tests can be created for DuckDB extensions. The primary way of testing DuckDB extensions should be the SQL tests in `./test/sql`. These SQL tests can be run using:
+
 ```sh
 make test
 ```

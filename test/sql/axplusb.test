@@ -1,18 +1,18 @@
-# name: test/sql/boilerplate.test
+# name: test/sql/axplusb.test
 # description: test boiler plate extension
-# group: [boilerplate]
+# group: [axplusb]
 
 # Before we load the extension, this will fail
 statement error
-SELECT boilerplate();
+SELECT axplusb();
 ----
-Catalog Error: Scalar Function with name boilerplate does not exist!
+Catalog Error: Scalar Function with name axplusb does not exist!
 
 # Require statement will ensure this test is run with this extension loaded
-require boilerplate
+require axplusb
 
 # Confirm the extension works
 query I
-SELECT boilerplate();
+SELECT axplusb();
 ----
-I'm a boilerplate!
+I'm a axplusb!
