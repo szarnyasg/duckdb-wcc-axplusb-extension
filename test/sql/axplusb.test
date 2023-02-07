@@ -13,6 +13,6 @@ require axplusb
 
 # Confirm the extension works
 query I
-SELECT axplusb();
+SELECT axplusb(1, 2, 3);
 ----
-I'm a axplusb!
+1
