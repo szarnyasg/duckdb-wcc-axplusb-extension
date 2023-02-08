@@ -27,14 +27,12 @@ int64_t axplusb(int64_t a, int64_t x, int64_t b) {
 
 inline void AxplusbScalarFun(DataChunk &args, ExpressionState &state, Vector &result) {
 	D_ASSERT(args.ColumnCount() >= 3);
-	errno = 0;
-	auto a = FlatVector::GetData<int64_t>(args.data[0])[0];
-	auto x = FlatVector::GetData<int64_t>(args.data[1]);
-	auto b = FlatVector::GetData<int64_t>(args.data[2])[0];
-	auto r = FlatVector::GetData<int64_t>(result);
-	for (idx_t i = 0; i < args.size(); i++) {
-		r[i] = axplusb(a, x[i], b);
-	}
+    TernaryExecutor::Execute<int64_t, int64_t, int64_t, int64_t>(
+            args.data[0], args.data[1], args.data[2], result, args.size(),
+            [&](int64_t a, int64_t x, int64_t b) {
+                return axplusb(a, x, b);
+            }
+    );
 }
 
 static void LoadInternal(DatabaseInstance &instance) {
