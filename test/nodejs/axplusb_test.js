@@ -13,7 +13,7 @@ describe(`axplusb extension`, () => {
     it('function should return expected constant', function (done) {
         db.all("SELECT axplusb(1, 2, 3) as value;", function (err, res) {
             if (err) throw err;
-            assert.deepEqual(res, [1]);
+            assert.deepEqual(res, [{value: 1}]);
             done();
         });
     });
